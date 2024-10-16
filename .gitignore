@@ -36,4 +36,8 @@ mini-proj-jspboard/.classpath
 mini-proj-jspboard/settings/
 
 # mini-proj-jspboard/.settings/ 폴더 무시
+<<<<<<< HEAD
 mini-proj-jspboard/.settings/
+=======
+mini-proj-jspboard/.settings/
+>>>>>>> branch 'master' of https://github.com/PaulJeoung/mini-proj-jspboard.git
