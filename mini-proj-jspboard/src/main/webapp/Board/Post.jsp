@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP Board</title>
+<title>[쉐킷펑크]</title>
 </head>
-<body>
+<body style="color: azure;" bgcolor="gray" >
 	<div>
 		<table width="600" cellpadding="3" align="center">
 			<tr>
@@ -14,7 +14,7 @@
 			</tr>
 		</table>
 		<br/>
-		<form name="postFrm" method="post" action="boardPost" enctype="multipard/form-data">
+		<form name="postFrm" method="post" enctype="multipart/form-data" action="boardPost">
 			<table width="600" cellpadding="3" align="center">
 				<tr>
 					<td align="center">

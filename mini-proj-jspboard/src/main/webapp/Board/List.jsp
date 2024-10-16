@@ -3,9 +3,10 @@
 
 <%@ page import="board.BoardBean"%>
 <%@ page import="java.util.Vector" %>
-<jsp:useBean id="bMgr" class="board.BoardMgr"></jsp:useBean>>
+<jsp:useBean id="bMgr" class="board.BoardMgr"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
+	
 	int totalRecord = 0;
 	int numPerPage = 10;
 	int pagePerBlock = 15;
@@ -17,8 +18,11 @@
 	int end = 10;
 	int listSize = 0;
 	
-	String keyWord = "", keyField = "";
+	String keyWord = "";
+	String keyField = "";
+	
 	Vector<BoardBean> vlist = null;
+	
 	if (request.getParameter("keyWord")!=null) {
 		keyWord = request.getParameter("keyWord");
 		keyField = request.getParameter("keyField");
@@ -44,7 +48,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>[쉐킷펑크]</title>
 <link href="style.css" rel="styleshteet" type="text/css" >
 <script type="text/javascript">
 	function list() {
@@ -78,14 +82,14 @@
 	}
 </script>
 </head>
-<body>
+<body style="color: azure;" bgcolor="gray" >
 	<div align="center">
-		<hr><h3>JSP Board</h3>
+		<hr><h3>낄끼빠빠 게시판</h3>
 		<p></p>
 		<table align="center" width="80%">
 			<tr>
 				<td>
-					Total : <%=totalRecord %>Articles(<font color="red"><%=nowPage %>/<%=totalPage %>Pages</font>
+					Total : <%=totalRecord %> 게시글 (<font color="white"><%=nowPage %>/<%=totalPage %>Pages)</font>
 				</td>
 			</tr>
 		</table>
@@ -105,6 +109,7 @@
 							<td>제목</td>
 							<td>이름</td>
 							<td>날짜</td>
+							<td>조회수</td>
 						</tr>
 						<%
 							for(int i=0; i<numPerPage; i++){
@@ -120,7 +125,8 @@
 								int count = bean.getCount();
 						%>
 						<tr>
-							<td>
+							<td align="center"><%=num %></td>
+							<td align="center">
 							<%
 								if(depth>0) {
 									for (int j=0;j<depth;j++) {
@@ -131,8 +137,8 @@
 							<a href="javascript:read('<%=num %>')"><%=subject %></a>
 							</td>
 							<td align="center"><%=name %></td>
-							<td align="center"><%=regdate %></td>
-							<td align="center"><%=count %></td>
+							<td align="center"><%=regdate %></td>					
+							<td align="center"><%=count %></td>	
 						</tr>
 						<% } %>
 					</table>

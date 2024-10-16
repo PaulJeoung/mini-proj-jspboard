@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>[쉐킷펑크]</title>
 </head>
-<body>
+<body style="color: azure;" bgcolor="gray" >
 
 </body>
 </html>
