@@ -123,7 +123,7 @@
 					<td colspan="3" align="center">
 						<input type="button" value="회원가입" onclick="inputCheck()">&nbsp;&nbsp;
 						<input type="reset" value="다시쓰기">&nbsp;&nbsp;
-						<input type="button" value="로그인" onClick="javascript:location.href='login.jsp'">
+						<input type="button" value="로그인" onClick="javascript:location.href='../Login/Login.jsp'">
 					</td>
 				</tr>
 			</table>

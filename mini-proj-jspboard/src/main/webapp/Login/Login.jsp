@@ -31,6 +31,7 @@
 		<b><%=id %>님 환영합니다</b>
 		<p>
 			제한된 기능을 사용 할 수가 있습니다
+			<input type="button" value="[쉐킷펑크] 이동" onClick="javascript:location.href='../Board/List.jsp'">
 		</p>
 		<a href="Logout.jsp">로그아웃</a>
 		<% } else { %>

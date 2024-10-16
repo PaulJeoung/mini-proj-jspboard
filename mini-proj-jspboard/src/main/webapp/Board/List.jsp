@@ -84,7 +84,7 @@
 </head>
 <body style="color: azure;" bgcolor="gray" >
 	<div align="center">
-		<hr><h3>낄끼빠빠 게시판</h3>
+		<hr><h3>[쉐킷펑크]</h3>
 		<p></p>
 		<table align="center" width="80%">
 			<tr>
