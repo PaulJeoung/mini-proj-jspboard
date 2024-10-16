@@ -22,3 +22,18 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# mini-proj-jspboard/build 폴더 무시
+mini-proj-jspboard/build/
+
+# mini-proj-jspboard/.project 무시
+mini-proj-jspboard/.project
+
+# mini-proj-jspboard/.classpath 무시
+mini-proj-jspboard/.classpath
+
+# mini-proj-jspboard/settings/ 폴더 무시
+mini-proj-jspboard/settings/
+
+# mini-proj-jspboard/.settings/ 폴더 무시
+mini-proj-jspboard/.settings/
