@@ -11,14 +11,17 @@
 		String inPass = request.getParameter("pass");
 		BoardBean bean = (BoardBean) session.getAttribute("bean");
 		String dbPass = bean.getPass();
+		System.out.println("Delete.jsp :: pass 확인 완료");
 		if(inPass.equals(dbPass)) {
 			bMgr.deleteBoard(num);
 			String url = "List.jsp?nowPage=" + nowPage;
 			response.sendRedirect(url);
+			System.out.println("Delete.jsp :: 삭제후 List.jsp 리다이렉트");
 		} else {
+			System.out.println("Delete.jsp :: pass 확인 실패");
 		%>
 			<script type="text/javascript">
-				alert("입력하신 비밀번호가 압니다");
+				alert("잘못된 비밀번호 입니다");
 				history.back();
 			</script>
 	<%	}
@@ -41,6 +44,43 @@
 <title>[쉐킷펑크]</title>
 </head>
 <body style="color: azure;" bgcolor="gray" >
-
+<div align="center">
+	<hr><h2 align="center" style="color: purple;">[쉐킷펑크보드]</h2>
+	<br/>
+	<table width="600" cellpadding"3">
+		<tr>
+			<td bgcolor=#dddddd height="21" align="center">
+			삭제를 위해서 비밀번호를 입력해 주세요
+			</td>
+		</tr>
+	</table>
+	<form name="delFrm" method="post" action="Delete.jsp">
+		<table width="600" cellpadding="2">
+			<tr>
+				<td align="center">
+					<table>
+						<tr>
+							<td align="center">
+								<input type="password" name="pass" size="17" maxlength="15" placeholder="비밀번호 입력" >
+							</td>
+						</tr>
+						<tr>
+							<td><br/></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="button" value="삭제완료" onclick="check()">
+								<input type="reset" value="다시쓰기">
+								<input type="button" value="뒤로" onclick="history.go(-1)">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="nowPage" value="<%=nowPage %>">
+		<input type="hidden" name="num" value="<%=num %>">
+	</form>
+</div>
 </body>
 </html>

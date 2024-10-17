@@ -34,17 +34,20 @@
 		document.downFrm.submit();
 	}
 </script>
+<style>
+   .borderedLine {border: 1px dotted white;}
+</style>
 </head>
 <body style="color: azure;" bgcolor="gray" >
-<hr>
-<table align="center" width="70%" border="0" cellspacing="3" cellpadding="0">
+<hr><h2 align="center" style="color: purple;">[쉐킷펑크보드]</h2>
+<table align="center" width="70%" border="0" cellspacing="3" cellpadding="0" >
 	<tr>
-		<td bgcolor="gray" height="25" align="center">글읽기
+		<td bgcolor="gray" height="25" align="center"><%=subject %>	
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<table border="0" cellpadding="3" cellsapcing="0" width="100%">
+			<table class="borderedLine" border="0" cellpadding="3" cellsapcing="0" width="100%">
 				<tr>
 					<td align="center" width="15%">작성자</td>
 					<td><%=name %></td>
@@ -78,7 +81,6 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-		<hr/>
 		[ <a href="javascript:list()">리스트</a> | 
 		<a href="Update.jsp?nowPage=<%=nowPage %>&num=<%=num %>">수정</a> |
 		<a href="Reply.jsp?nowPage=<%=nowPage %>">답변</a> |  
@@ -99,5 +101,6 @@
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<% } %>
 </form>
+<hr/>
 </body>
 </html>

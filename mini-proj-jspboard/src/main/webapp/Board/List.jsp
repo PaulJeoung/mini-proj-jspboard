@@ -50,6 +50,9 @@
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
 <link href="style.css" rel="styleshteet" type="text/css" >
+<style>
+   .borderedLine {border: 1px dotted white;}
+</style>
 <script type="text/javascript">
 	function list() {
 		document.listFrm.action = "List.jsp";
@@ -84,7 +87,7 @@
 </head>
 <body style="color: azure;" bgcolor="gray" >
 	<div align="center">
-		<hr><h3>[쉐킷펑크]</h3>
+		<hr><h2 style="color: purple;">[쉐킷펑크보드]</h2>
 		<p></p>
 		<table align="center" width="80%">
 			<tr>
@@ -93,7 +96,7 @@
 				</td>
 			</tr>
 		</table>
-		<table align="center" width="80%" border="0" cellspacing="0" cellpadding="3">
+		<table class="borderedLine" align="center" width="80%" border="0" cellspacing="0" cellpadding="3">
 			<tr>
 				<td align="center" colspan="2">
 					<%
@@ -104,6 +107,7 @@
 							} else {
 					%>
 					<table border="0" width="100%" cellpadding="2" cellspacing="0">
+						<tr><td colspan="5"><br/></td></tr>
 						<tr align="center" height="120%">
 							<td>번호</td>
 							<td>제목</td>
@@ -126,7 +130,7 @@
 						%>
 						<tr>
 							<td align="center"><%=num %></td>
-							<td align="center">
+							<td align="left">
 							<%
 								if(depth>0) {
 									for (int j=0;j<depth;j++) {
@@ -146,8 +150,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><br/><br/></td>
+				<td colspan="2"><br/></td>
 			</tr>
+		</table>
+		<table>
 			<tr>
 				<td>
 				<!-- 페이징 및 블럭처리 시작 -->

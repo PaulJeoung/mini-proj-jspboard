@@ -22,6 +22,7 @@ public class UtilMgr {
 		if(file.isFile()) {
 			file.delete();
 		}
+		System.out.println("class common.UtilMgr() :: delete() :: 파일 삭제 객체 생성 후 삭제");
 	}
 	
 	public static String conn(String s) {

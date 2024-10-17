@@ -8,6 +8,7 @@
 </head>
 <body style="color: azure;" bgcolor="gray" >
 	<div>
+	<hr><h2 align="center" style="color: purple;">[쉐킷펑크보드]</h2>
 		<table width="600" cellpadding="3" align="center">
 			<tr>
 				<td bgcolor="gray" height="25" align="center">글쓰기</td>
@@ -62,6 +63,7 @@
 			</table>
 			<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
 		</form>
+		<hr/>
 	</div>
 </body>
 </html>

@@ -1,6 +1,9 @@
 package board;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +11,9 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 
 import com.mysql.cj.util.Util;
 import com.oreilly.servlet.MultipartRequest;
@@ -149,7 +155,6 @@ public class BoardMgr {
 		return bean;
 	}
 	
-	
 	// Read.jsp
 	public void upCount(int num) {
 		System.out.println(getClass() + " :: upCount() :: 함수 시작");
@@ -209,7 +214,7 @@ public class BoardMgr {
 			psmt.setString(7, filename);
 			psmt.setInt(8, filesize);
 			psmt.executeUpdate();
-			System.out.println(getClass() + " :: deleteBoard() :: 쿼리 실행 완료 [INSERT]");
+			System.out.println(getClass() + " :: insertBoard() :: 쿼리 실행 완료 [INSERT]");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(getClass() + " :: insertBoard() :: 쿼리 실행 중 Exception 발생");
@@ -219,16 +224,76 @@ public class BoardMgr {
 		}
 	}
 	
+	// Download.jsp
+		public void download(HttpServletRequest req, HttpServletResponse resp, JspWriter out, PageContext pageContext) {
+			System.out.println(getClass() + " :: download() :: 함수 시작");
+			try {
+				String filename = req.getParameter("filename");
+				File file = new File(UtilMgr.conn(SAVEFOLDER + File.separator + filename));
+				byte b[] = new byte[(int) file.length()]; // 응답 객체 헤더필드에 바이트 단위로 설정
+				
+				resp.setHeader("Accept-Ranges", "bytes"); // 요청 객체에서 클라이언트의 정보를 리턴
+				
+				String strClient = req.getHeader("User-Agent"); // 브라우저 정보를 구분해 contentType, 헤더 필드 설정
+				if (strClient.indexOf("MSIE6.0")!=-1) {
+					resp.setContentType("application/smnet;charset=utf-8");
+					resp.setHeader("Content-Disposition", "filename=" + filename + ";");
+				} else {
+					resp.setContentType("application/smnet;charset=utf-8");
+					resp.setHeader("Content-Disposition", "attachment;filename=" + filename + ";");
+				}
+				System.out.println(getClass() + " :: download() :: 다운로드 정보 객체에 담기");
+				out.clear();
+				out = pageContext.pushBody(); // 파일 존재여부에 따라 스트링 방식으로 브라우저 파일 전송
+				
+				System.out.println(getClass() + " :: download() :: IOStream 을 통한 파일 다운로드 시작");
+				if(file.isFile()) {
+					BufferedInputStream fin = new BufferedInputStream(new FileInputStream(file));
+					BufferedOutputStream outs = new BufferedOutputStream(resp.getOutputStream());
+					int read = 0;
+					while ((read=fin.read(b))!=-1) {
+						outs.write(b, 0, read);
+					}
+					outs.close();
+					fin.close();
+				}
+				System.out.println(getClass() + " :: download() :: 다운로드 실행 완료 [DOWNLOAD]");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(getClass() + " :: download() :: 쿼리 실행 중 Exception 발생");
+			} finally {
+				pool.freeConnection(conn, psmt);
+				System.out.println(getClass() + " :: download() :: 다운로드 쿼리 조회 종료 ==> ");
+			}
+		}
+	
 	// Delete.jsp
 	public void deleteBoard(int num) {
 		System.out.println(getClass() + " :: deleteBoard() :: 함수 시작");
 		try {
-//				conn = pool.getConnection();
-//				sql = "UPDATE sqlplus.board1 SET count=count+1 WHERE num = ?";
-//				psmt = conn.prepareStatement(sql);
-//				psmt.setInt(1, num);
-//				psmt.executeUpdate();
-//				System.out.println(getClass() + " :: deleteBoard() :: 쿼리 실행 완료 [UPDATE]");
+			conn = pool.getConnection();
+			
+			sql = "SELECT filname FROM sqlplus.board1 WHERE num = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			rs = psmt.executeQuery();
+			System.out.println(getClass() + " :: deleteBoard() :: 파일 삭제를 위한 쿼리 실행");
+			
+			if(rs.next( )&& rs.getString(1)!=null) {
+				if(!rs.getString(1).equals("")){
+					File file = new File(SAVEFOLDER + "/" + rs.getString(1));
+					if(file.exists()) {
+						UtilMgr.delete(SAVEFOLDER + "/" + rs.getString(1));
+					}
+				}
+			}
+			System.out.println(getClass() + " :: deleteBoard() :: class UtilMgr를 통해 파일 삭제");
+			
+			sql = "DELTE FROM sqlplus.board1 WHRER num = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			psmt.executeUpdate();
+			System.out.println(getClass() + " :: deleteBoard() :: 쿼리 실행 완료 [UPDATE]");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(getClass() + " :: deleteBoard() :: 쿼리 실행 중 Exception 발생");
@@ -238,6 +303,84 @@ public class BoardMgr {
 		}
 	}
 	
+	// Update.jsp
+	public void updateBoard(BoardBean bean) {
+		System.out.println(getClass() + " :: updateBoard() :: 함수 시작");
+		try {
+			conn = pool.getConnection();
+			sql = "UPDATE sqlplus.board1 SET name = ?, subject = ?, content = ? WHERE num = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, bean.getName());
+			psmt.setString(2, bean.getSubject());
+			psmt.setString(3, bean.getContent());
+			psmt.setInt(4, bean.getNum());
+			
+			psmt.executeUpdate();
+			System.out.println(getClass() + " :: updateBoard() :: 쿼리 실행 완료 [UPDATE]");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(getClass() + " :: updateBoard() :: 쿼리 실행 중 Exception 발생");
+		} finally {
+			pool.freeConnection(conn, psmt);
+			System.out.println(getClass() + " :: updateBoard() :: 업데이트 쿼리 조회 종료 ==> ");
+		}
+	}
+	
+	// Reply.jsp
+	public void replyBoard(BoardBean bean) {
+		System.out.println(getClass() + " :: replyBoard() :: 함수 시작");
+		try {
+			conn = pool.getConnection();
+			sql = "INSERT sqlplus.board1 (name, content, subject, ref, pos, depth, regdate, pass, count, ip)";
+			sql += " VALUES (?, ?, ?, ?, ?, ?, now(), ?, 0, ?)";
+			int depth = bean.getDepth()+1;
+			int pos = bean.getPos()+1;
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, bean.getName());
+			psmt.setString(2, bean.getContent());
+			psmt.setString(3, bean.getSubject());
+			psmt.setInt(4, bean.getRef());
+			psmt.setInt(5, pos);
+			psmt.setInt(6, depth);
+			psmt.setString(7, bean.getPass());
+			psmt.setString(8, bean.getIp());
+			
+			psmt.executeUpdate();
+			System.out.println(getClass() + " :: replyBoard() :: 쿼리 실행 완료 [UPDATE]");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(getClass() + " :: replyBoard() :: 쿼리 실행 중 Exception 발생");
+		} finally {
+			pool.freeConnection(conn, psmt);
+			System.out.println(getClass() + " :: replyBoard() :: 업데이트 쿼리 조회 종료 ==> ");
+		}
+	}
+	
+	// Reply.jsp
+	public void replyUpBoard(int ref, int pos) {
+		System.out.println(getClass() + " :: replyUpBoard() :: 함수 시작");
+		try {
+			conn = pool.getConnection();
+			sql = "UPDATE sqlplus.board1 SET pos = pos+1 WHERE ref = ? and pos > ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, ref);
+			psmt.setInt(2, pos);
+			
+			psmt.executeUpdate();
+			System.out.println(getClass() + " :: replyUpBoard() :: 쿼리 실행 완료 [UPDATE]");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(getClass() + " :: replyUpBoard() :: 쿼리 실행 중 Exception 발생");
+		} finally {
+			pool.freeConnection(conn, psmt);
+			System.out.println(getClass() + " :: replyUpBoard() :: 업데이트 쿼리 조회 종료 ==> ");
+		}
+	}
+
 	// 나중에 지울 것
 	public void strPrinter(String str) {
 		System.out.println(getClass() + " :: method() :: 함수 시작");

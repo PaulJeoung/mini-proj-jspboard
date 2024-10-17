@@ -31,7 +31,7 @@ function inputCheck(){
 		alert("생년월일을 입력해 주세요.");
 		document.regFrm.birthday.focus();
 		return;
-	} else if (regex.test(birth)){
+	} else if (!regex.test(birth)){
 		alert("생년월일은 6자리로 입력해야 합니다 (ex. yyMMdd).");
 		document.regFrm.birthday.focus();
 		return;
