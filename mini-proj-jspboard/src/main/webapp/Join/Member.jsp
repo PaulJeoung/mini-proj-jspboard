@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>JOIN</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<!-- link href="style.css" rel="stylesheet" type="text/css" -->
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
 	function idCheck(id) {
 		if (id == "") {
-			alert("아이디를 입력해 주세요");
+			alert("Hey, input your ID now");
 			frm.id.focus();
 			return;
 		}
@@ -23,87 +23,90 @@
 	}
 </script>
 </head>
-<body onLoad="regFrm.id.focus()">
+<!-- body onLoad="regFrm.id.focus()" -->
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;" onLoad="regFrm.id.focus()">
 	<div align="center">
 		<hr/>
 		<form name="regFrm" method="post" action="MemberProc.jsp">
-			<table align="center" >
+			<table align="center" style="color: #66ff66;">
+				<tr><td><br/></td></tr>
 				<tr>
-					<td colspan="3" align="center">회원가입</td>
+					<td colspan="3" align="center">NEWBIE COMEIN (SIGNIN)</td>
 				</tr>
+				<tr><td><br/></td></tr>
 				<tr>
-					<td width="30%">아이디</td>
+					<td width="30%">ID</td>
 					<td width="40%">
-						<input type="text" name="id" size="25" placeholder="아이디를 적어주세요">
+						<input type="text" name="id" size="25" placeholder="put the ID">
 					</td>
 					<td width="30%">
-						<input type="button" value="ID중복확인" onClick="idCheck(this.form.id.value)">
+						<input type="button" value="ID vaild Check" onClick="idCheck(this.form.id.value)">
 					</td>
 				</tr>
 				<tr>
-					<td>패스워드</td>
+					<td>PASSWORD</td>
 					<td>
-						<input type="password" name="pwd" size="25" placeholder="비밀번호를 넣어주세요">
+						<input type="password" name="pwd" size="25" placeholder="put your password">
 					</td>
 					<td>
-						<input type="password" name="repwd" size="25" placeholder="비밀번호를 확인합니다">
+						<input type="password" name="repwd" size="25" placeholder="check your password">
 					</td>
 				</tr>
 				<tr>
-					<td>이름</td>
+					<td>NAME</td>
 					<td colspan="2">
-						<input type="text" name="name" size="25" placeholder="이름을 넣어 주세요">
+						<input type="text" name="name" size="25" placeholder="What`s your name">
 					</td>
 				</tr>
 				<tr>
-					<td>성별</td>
+					<td>GENDER</td>
 					<td colspan="2">
-						남<input type="radio" name="gender" value="1" checked="checked">&nbsp;&nbsp;
-						여<input type="radio" name="gender" value="2">
+						MALE<input type="radio" name="gender" value="1" checked="checked">&nbsp;&nbsp;
+						FEMALE<input type="radio" name="gender" value="2">
 					</td>
 				</tr>
 				<tr>
-					<td>생년월일</td>
+					<td>BIRTHDAY</td>
 					<td colspan="2">
 						<input type="text" name="birthday" size="25" placeholder="ex) 950827">
 					</td>
 				</tr>
 				<tr>
-					<td>이메일</td>
+					<td>EMAIL</td>
 					<td colspan="2">
 						<input type="email" name="email" size="25" placeholder="ex) guest1014@newpage.com">
 					</td>
 				</tr>
 				<tr>
-					<td>우편번호</td>
+					<td>ZIPCODE</td>
 					<td>
-						<input type="text" name="zipcode" size="25" placeholder="찾기버튼을 눌러주세요" readonly>
+						<input type="text" name="zipcode" size="25" placeholder="search button please..." readonly>
 					</td>
 					<td>
-						<input type="button" value="우편번호찾기" onClick="zipCheck()">
+						<input type="button" value="SEARCH ZIP_CODE" onClick="zipCheck()">
 					</td>
 				</tr>
 				<tr>
-					<td>주소</td>
+					<td>ADDRESS</td>
 					<td colspan="2">
-						<input type="text" name="address" size="50" placeholder="주소를 적어주세요">
+						<input type="text" name="address" size="50" placeholder="HOME address here">
 					</td>
 				</tr>
 				<tr>
-					<td>취미</td>
+					<td>CHOOSE IT</td>
 					<td colspan="2">
-						<input type="checkbox" name="hobby" value="인터넷"><label>인터넷</label>&nbsp;
-						<input type="checkbox" name="hobby" value="여행"><label>여행</label>&nbsp;
-						<input type="checkbox" name="hobby" value="게임"><label>게임</label>&nbsp;
-						<input type="checkbox" name="hobby" value="영화"><label>영화</label>&nbsp;
-						<input type="checkbox" name="hobby" value="운동"><label>운동</label>
+						<input type="checkbox" name="hobby" value="인터넷"><label>NET SURFING</label>&nbsp;
+						<input type="checkbox" name="hobby" value="여행"><label>JOURNEY</label>&nbsp;
+						<input type="checkbox" name="hobby" value="게임"><label>PLAY GAMEING</label>&nbsp;
+						<input type="checkbox" name="hobby" value="영화"><label>JUST TV</label>&nbsp;
+						<input type="checkbox" name="hobby" value="운동"><label>GYM HOLICS</label>
 					</td>
 				</tr>
 				<tr>
-					<td>직업</td>
+					<td>JOB</td>
 					<td colspan="2">
 						<select name="job">
-							<option value="0" selected>선택하세요.
+							<option value="0" selected>CHOOSE IT!!
 							<option value="회사원">회사원
 							<option value="연구전문직">연구/전문직
 							<option value="교수,학생">교수/학생
@@ -121,9 +124,9 @@
 				</tr>
 				<tr>
 					<td colspan="3" align="center">
-						<input type="button" value="회원가입" onclick="inputCheck()">&nbsp;&nbsp;
-						<input type="reset" value="다시쓰기">&nbsp;&nbsp;
-						<input type="button" value="로그인" onClick="javascript:location.href='../Login/Login.jsp'">
+						<input type="button" value="SIGNIN" onclick="inputCheck()">&nbsp;&nbsp;
+						<input type="reset" value="RESET">&nbsp;&nbsp;
+						<input type="button" value="LOGIN" onClick="javascript:location.href='../Login/Login.jsp'">
 					</td>
 				</tr>
 			</table>

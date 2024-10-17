@@ -13,13 +13,15 @@
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
 </head>
-<body style="color: azure;" bgcolor="gray" >
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 <div align="center">
-	<hr/>
+	<hr><h2 align="center">[Shake_it Funk Board]</h2>
 	<table width="460" cellspacing="0" cellpadding="3">
+		<tr><td><br/></td></tr>
 		<tr>
-			<td bgcolor="black" height="21" align="center">답변하기</td>
+			<td bgcolor="gray" height="21" align="center">답변하기</td>
 		</tr>
+		<tr><td><br/></td></tr>
 	</table>
 	<form method="post" action="boardReply">
 		<table width="600" cellpadding="7">
@@ -27,15 +29,15 @@
 				<td align="center">
 					<table>
 						<tr>
-							<td width="20%">이름</td>
+							<td width="20%" align="center">이름</td>
 							<td width="80%"><input name="name" size="30" maxlength="20" /></td>
 						</tr>
 						<tr>
-							<td>제목</td>
+							<td align="center">제목</td>
 							<td><input name="subject" size="50" maxlength="50" value="ㄴ 답변 : <%=subject %>"/></td>
 						</tr>
 						<tr>
-							<td>내용</td>
+							<td align="center">내용</td>
 							<td>
 							<textarea name="content" rows="12" cols="50" >
 								<%=content %>
@@ -44,11 +46,12 @@
 							</td>
 						</tr>
 						<tr>
-							<td>비밀번호</td>
+							<td align="center">비밀번호</td>
 							<td><input type="password" name="pass" size="20" maxlength="20" placeholder="비밀번호를 넣어주세요"/></td>
 						</tr>
+						<tr><td colspan="2"><br/></td></tr>
 						<tr>
-							<td colspan="2">
+							<td colspan="2" align="center">
 								<input type="submit" value="답변등록"/>
 								<input type="reset" value="다시쓰기"/>
 								<input type="button" value="뒤로" onclick="history.back()"/>
@@ -65,5 +68,6 @@
 			<input type="hidden" name="depth" value="<%= bean.getDepth() %>">
 	</form>
 </div>
+<hr/>
 </body>
 </html>

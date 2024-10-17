@@ -49,10 +49,11 @@
 <head>
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
-<link href="style.css" rel="styleshteet" type="text/css" >
+
 <style>
    .borderedLine {border: 1px dotted white;}
 </style>
+<link rel="stylesheet" href="styles.css">
 <script type="text/javascript">
 	function list() {
 		document.listFrm.action = "List.jsp";
@@ -85,14 +86,15 @@
 	}
 </script>
 </head>
-<body style="color: azure;" bgcolor="gray" >
+
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 	<div align="center">
-		<hr><h2 style="color: purple;">[쉐킷펑크보드]</h2>
+		<hr><h2>[Shake_it Funk Board]</h2>
 		<p></p>
 		<table align="center" width="80%">
 			<tr>
 				<td>
-					Total : <%=totalRecord %> 게시글 (<font color="white"><%=nowPage %>/<%=totalPage %>Pages)</font>
+					Total : <%=totalRecord %> 게시글 (<%=nowPage %>/<%=totalPage %>Pages)
 				</td>
 			</tr>
 		</table>
@@ -109,11 +111,11 @@
 					<table border="0" width="100%" cellpadding="2" cellspacing="0">
 						<tr><td colspan="5"><br/></td></tr>
 						<tr align="center" height="120%">
-							<td>번호</td>
-							<td>제목</td>
-							<td>이름</td>
-							<td>날짜</td>
-							<td>조회수</td>
+							<td width="10%">번호</td>
+							<td width="40%">제목</td>
+							<td width="*">이름</td>
+							<td width="*">날짜</td>
+							<td width="*">조회수</td>
 						</tr>
 						<%
 							for(int i=0; i<numPerPage; i++){
@@ -130,7 +132,7 @@
 						%>
 						<tr>
 							<td align="center"><%=num %></td>
-							<td align="left">
+							<td align="left" style="color: #66ff66;">
 							<%
 								if(depth>0) {
 									for (int j=0;j<depth;j++) {
@@ -138,7 +140,7 @@
 									}
 								}
 							%>
-							<a href="javascript:read('<%=num %>')"><%=subject %></a>
+							<a href="javascript:read('<%=num %>')" style="color: #66aa00;"><%=subject %></a>
 							</td>
 							<td align="center"><%=name %></td>
 							<td align="center"><%=regdate %></td>					
@@ -155,7 +157,7 @@
 		</table>
 		<table>
 			<tr>
-				<td>
+				<td style="color:white;">
 				<!-- 페이징 및 블럭처리 시작 -->
 				<%
 					int pageStart = (nowBlock-1)*pagePerBlock+1;
@@ -168,29 +170,29 @@
 					<%
 						for ( ; pageStart<pageEnd; pageStart++){ 
 					%>
-					<a href="javascript:pageing('<%=pageStart %>')">
+					<a href="javascript:pageing('<%=pageStart %>')" style="color: #66ff66;">
 					<%
 						if(pageStart==nowPage) {
 					%>
-					<font color="blue">
+					
 					<% } %>
 					[<%=pageStart %>]
 					<%
 						if(pageStart==nowPage) { 
-					%></font>
+					%>
 					<% } %></a>
 					<% } %>&nbsp;
 					<%
 						if(totalBlock>nowBlock) {
 					%>
-					<a href="javascript:block('<%=nowBlock+1 %>')">...next</a>
+					<a href="javascript:block('<%=nowBlock+1 %>')"style="color: #66ff66;">...next</a>
 					<% } %>&nbsp;
 					<% } %>
 					<!-- 페이징 및 블록처리 종료 -->
 				</td>
 				<td align="right">
-					<a href="Post.jsp">[글쓰기]</a>
-					<a href="javascript:list()">[처음으로]</a>
+					<a href="Post.jsp" style="color: #66ff66;">[글쓰기]</a>
+					<a href="javascript:list()" style="color: #66ff66;">[처음으로]</a>
 				</td>
 			</tr>
 		</table>
@@ -211,6 +213,14 @@
 				</tr>
 			</table>
 		</form>
+		<table>
+			<tr><td><br/></td><td></td><td></td></tr>
+			<tr>
+				<td align="right" colspan="3">
+					<a style="color: #66ff66;" href="../Login/Logout.jsp">로그아웃</a>
+				</td>
+			</tr>
+		</table>
 		<form name="listFrm" method="post">
 			<input type="hidden" name="reload" value="true">
 			<input type="hidden" name=nowPage" value="1">

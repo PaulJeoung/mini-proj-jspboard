@@ -13,9 +13,9 @@
 	boolean result = mMgr.checkId(id);
 %>
 
-<link href="style.css" rel="stylesheet" type="text/css">
+<!-- link href="style.css" rel="stylesheet" type="text/css" -->
 </head>
-<body>
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 	<div align="center">
 		<b><%=id %></b>
 		<%
@@ -25,7 +25,7 @@
 				out.println(" 는 사용 가능한 ID 입니다<p/>");
 			}
 		%>
-		<a href="#" onClick="self.close()">닫기</a>
+		<a href="#" onClick="self.close()" style="color: #66ff66;">닫기</a>
 	
 	</div>
 </body>

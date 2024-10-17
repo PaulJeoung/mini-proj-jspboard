@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
 </head>
-<body style="color: azure;" bgcolor="gray" >
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 	<div>
-	<hr><h2 align="center" style="color: purple;">[쉐킷펑크보드]</h2>
+	<hr><h2 align="center">[Shake_it Funk Board]</h2>
 		<table width="600" cellpadding="3" align="center">
 			<tr>
 				<td bgcolor="gray" height="25" align="center">글쓰기</td>

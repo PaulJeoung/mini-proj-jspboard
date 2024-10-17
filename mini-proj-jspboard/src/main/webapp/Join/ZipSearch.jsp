@@ -19,7 +19,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ZIPCODE SEARCH</title>
-<link href="style.css" rel="stylesheet" type="text/css">
+<!-- link href="style.css" rel="stylesheet" type="text/css" -->
 <script type="text/javascript">
 	function loadSearch() {
 		frm = document.zipFrm;
@@ -38,7 +38,7 @@
 	}
 </script>
 </head>
-<body>
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 	<div align="center">
 		<form name="zipFrm" method="post">
 			<table>
@@ -71,7 +71,7 @@
 			%>
 			<tr>
 				<td>
-					<a href="#" onclick="javascript:sendAddress('<%=rZipcode %>','<%=address %>')"><%=rZipcode %> <%=address %></a>
+					<a style="color: #66ff66;" href="#" onclick="javascript:sendAddress('<%=rZipcode %>','<%=address %>')"><%=rZipcode %> <%=address %></a>
 				</td>
 			</tr>
 			<%
@@ -81,7 +81,7 @@
 			%>
 			<tr>
 				<td align="center"><br/>
-					<a href="#" onClick="self.close()">닫기</a>
+					<a style="color: #66ff66;" href="#" onClick="self.close()">닫기</a>
 				</td>
 			</tr>
 			<input type="hidden" name="search" value="y">

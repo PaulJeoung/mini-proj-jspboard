@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
 </head>
-<body style="color: azure;" bgcolor="gray" >
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: monospace;">
 
 </body>
 </html>

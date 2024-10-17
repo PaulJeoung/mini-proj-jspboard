@@ -23,7 +23,7 @@
 </script>
 <title>회원가입확인</title>
 </head>
-<body>
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 
 </body>
 </html>

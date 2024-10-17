@@ -26,9 +26,9 @@
 	}
 </script>
 </head>
-<body style="color: azure;" bgcolor="gray" >
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 	<div align="center">
-	<hr/>
+	<hr><h2 align="center">[Shake_it Funk Board]</h2>
 		<table width="460" cellspacing="0" cellpadding="3">
 			<tr>
 				<td bgcolor="black" height="21" align="center">수정하기</td>

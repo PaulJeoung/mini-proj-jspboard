@@ -35,14 +35,14 @@
 	}
 </script>
 <style>
-   .borderedLine {border: 1px dotted white;}
+   .borderedLine {border: 1px dotted #66ff66;}
 </style>
 </head>
-<body style="color: azure;" bgcolor="gray" >
-<hr><h2 align="center" style="color: purple;">[쉐킷펑크보드]</h2>
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
+<hr><h2 align="center">[Shake_it Funk Board]</h2>
 <table align="center" width="70%" border="0" cellspacing="3" cellpadding="0" >
 	<tr>
-		<td bgcolor="gray" height="25" align="center"><%=subject %>	
+		<td bgcolor="gray" height="25" align="center"><h4><%=subject %></h4>	
 		</td>
 	</tr>
 	<tr>
@@ -81,10 +81,10 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
-		[ <a href="javascript:list()">리스트</a> | 
-		<a href="Update.jsp?nowPage=<%=nowPage %>&num=<%=num %>">수정</a> |
-		<a href="Reply.jsp?nowPage=<%=nowPage %>">답변</a> |  
-		<a href="Delete.jsp?nowPage=<%=nowPage %>&num=<%=num %>">삭제</a>
+		[ <a href="javascript:list()" style="color: #66ff66;">리스트</a> | 
+		<a href="Update.jsp?nowPage=<%=nowPage %>&num=<%=num %>" style="color: #66ff66;">수정</a> |
+		<a href="Reply.jsp?nowPage=<%=nowPage %>" style="color: #66ff66;">답변</a> |  
+		<a href="Delete.jsp?nowPage=<%=nowPage %>&num=<%=num %>" style="color: #66ff66;">삭제</a>
 		]<br/>
 		</td>
 	</tr>

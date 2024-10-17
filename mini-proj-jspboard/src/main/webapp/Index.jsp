@@ -37,14 +37,14 @@
         }
     </style>
 </head>
-<body>
-
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
     <div class="hero">
         <h1>WELCOME!</h1>
-        <p>[쉐킷펑크]에 오신것을 환영합니다. 지금 시작해보세요!</p>
+        <p>SHAKE_IT FUNK is HERE</p>
+        <p>NOW FALL IN STAGE</p>
         <div class="button-container">
-            <a href="Join/Member.jsp" class="btn btn-custom">회원 가입</a>
-            <a href="Login/Login.jsp" class="btn btn-custom" style="margin-left: 20px;">로그인</a>
+            <a href="Join/Member.jsp" class="btn btn-custom">SIGNIN</a>
+            <a href="Login/Login.jsp" class="btn btn-custom" style="margin-left: 20px;">LOGIN</a>
         </div>
     </div>
 

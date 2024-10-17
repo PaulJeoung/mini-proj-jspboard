@@ -23,30 +23,47 @@
 		}
 		document.loginFrm.submit();
 	}
+	
+	function rediectToList() {
+		setTimeout(function() {
+			window.location.href = '../Board/List.jsp';			
+		}, 3000);
+	}
 </script>
 </head>
-<body>
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
+<hr/><br/>
 	<div align="center">
 		<% if (id != null) { %>
-		<b><%=id %>님 환영합니다</b>
+		<h2><%=id %> 님 환영합니다</h2><br/><br/>
 		<p>
-			제한된 기능을 사용 할 수가 있습니다
-			<input type="button" value="[쉐킷펑크] 이동" onClick="javascript:location.href='../Board/List.jsp'">
+			<b>잠시 후 SHAKE_IT FUNK BOARD 로 이동 합니다</b><br/>
+			<b>원하지 않으시면 3초 안에 아래 로그아웃을 누르세요</b><br/><br/><br/><br/>
+			아래 눌러서 도망가기<br/>
+			🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽🔽<br/><br/>
+			<!-- input type="button" value="SHAKE_IT FUNK BOARD" onClick="javascript:location.href='../Board/List.jsp'" -->
 		</p>
-		<a href="Logout.jsp">로그아웃</a>
+		<a style="color: #66ff66;" href="Logout.jsp">로그아웃</a>
+		
+		<script type="text/javascript">
+			rediectToList();
+		</script>
+		
 		<% } else { %>
 		<form name="loginFrm" method="post" action="LoginProc.jsp">
 			<table>
+				<tr><td><br/></td></tr>
 				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="id"/></td>
+					<td>ID</td>
+					<td><input type="text" name="id" placeholder="input your id"/></td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pwd"/></td>
+					<td>PASSWORD</td>
+					<td><input type="password" name="pwd" placeholder="password here!!"/></td>
 				</tr>
+				<tr><td><br/></td></tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" align="center">
 						<input type="button" value="로그인" onclick="loginCheck()"/>&nbsp;
 						<input type="button" value="회원가입" onclick="javascript:location.href='../Join/Member.jsp'"/>
 					</td>

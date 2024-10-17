@@ -43,16 +43,17 @@
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
 </head>
-<body style="color: azure;" bgcolor="gray" >
+<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
 <div align="center">
-	<hr><h2 align="center" style="color: purple;">[쉐킷펑크보드]</h2>
+	<hr><h2 align="center">[Shake_it Funk Board]</h2>
 	<br/>
-	<table width="600" cellpadding"3">
+	<table width="500" cellpadding"3">
 		<tr>
-			<td bgcolor=#dddddd height="21" align="center">
+			<td bgcolor=gray height="21" align="center">
 			삭제를 위해서 비밀번호를 입력해 주세요
 			</td>
 		</tr>
+		<tr><td><br/></td></tr>
 	</table>
 	<form name="delFrm" method="post" action="Delete.jsp">
 		<table width="600" cellpadding="2">
@@ -82,5 +83,6 @@
 		<input type="hidden" name="num" value="<%=num %>">
 	</form>
 </div>
+<hr/>
 </body>
 </html>
