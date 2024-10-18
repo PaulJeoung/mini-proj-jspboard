@@ -15,6 +15,8 @@ public class MemberMgr {
 	private ResultSet rs = null;
 	private String sql = "";
 	private boolean flag = false;
+	private boolean idFlag = false;
+	private boolean pwFlag = false;
 	
 	public MemberMgr() {
 		try {
@@ -119,24 +121,39 @@ public class MemberMgr {
 		return flag;
 	}
 	
-	public boolean loginMember(String id, String pwd) {
-		System.out.println(getClass() + " :: loginMember() :: 회원정보 검색 시작");
+	public LoginResult loginMember(String id, String pwd) {
+		boolean success = false;
+	    boolean idValid = false;
+	    boolean pwdValid = false;
+
+		System.out.println(getClass() + " :: loginMember() :: 로그인정보 조회 시작");
+
 		try {
 			conn = pool.getConnection();
-			sql = "SELECT id FROM sqlplus.member WHERE id = ? and pwd = ?";
+			sql = "SELECT id, pwd FROM sqlplus.member WHERE id = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
-			psmt.setString(2, pwd);
 			rs = psmt.executeQuery();
-			flag = rs.next();
-			System.out.println(getClass() + " :: loginMember() :: 회원정보 검색 완료 ==> resultFlag : " + flag);
+			
+			while (rs.next()) {
+				String resultId = rs.getString("id");
+	            String resultPw = rs.getString("pwd");
+	            System.out.println(id + ", " + resultId + " || " + pwd + ", " + resultPw);
+	            idValid = true; // ID가 존재함
+	            if (resultPw.equals(pwd)) {
+	                success = true; // 로그인 성공
+	                pwdValid = true; // 비밀번호도 일치
+	            }
+	        }
+			
+			System.out.println(getClass() + " :: loginMember() :: 로그인정보 조회 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(getClass() + " :: loginMember() :: 회원정보 검색 도중 Exception 발생");
+			System.out.println(getClass() + " :: loginMember() :: 로그인정보 조회 도중 Exception 발생");
 		} finally {
 			pool.freeConnection(conn, psmt);
 		}
-		return flag;
+		return new LoginResult(success, idValid, pwdValid);
 	}
 	
 	public MemberBean getMember(String id) {

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<jsp:useBean id="mMgr" class="member.MemberMgr"/>
+<jsp:useBean id="mMgr" class="member.MemberMgr"></jsp:useBean>
 <html>
 <head>
 <meta charset="UTF-8">

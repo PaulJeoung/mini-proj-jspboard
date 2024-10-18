@@ -15,11 +15,11 @@
 			return;
 		}
 		url = "IdCheck.jsp?id="+id;
-		window.open(url, "ID_CHECK", "width=300, height=150");
+		window.open(url, "ID_CHECK", "width=450, height=250");
 	}
 	function zipCheck() {
 		url = "ZipSearch.jsp?check=n";
-		window.open(url, "ZIP_CODE_SEARCH", "width=500, heught=300, scrollbars=yes");
+		window.open(url, "ZIP_CODE_SEARCH", "width=450, height=600, scrollbars=yes");
 	}
 </script>
 </head>
