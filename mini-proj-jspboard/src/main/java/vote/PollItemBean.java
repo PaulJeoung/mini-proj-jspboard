@@ -6,6 +6,8 @@ public class PollItemBean {
 	private int itemnum;
 	private String [] item;
 	private int count;
+	
+	
 	public int getListnum() {
 		return listnum;
 	}

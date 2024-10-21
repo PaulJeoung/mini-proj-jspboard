@@ -3,6 +3,7 @@ package vote;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import org.apache.catalina.valves.rewrite.InternalRewriteMap.Escape;
@@ -61,6 +62,8 @@ public class PollMgr {
 	        psmt.setString(2, plBean.getSdate());
 	        psmt.setString(3, plBean.getEdate());
 	        psmt.setInt(4, plBean.getType());
+	        
+	        System.out.println(getClass() + " :: insertPoll() :: questionData ==> " + plBean.getQuestion());
 
 	        int result = psmt.executeUpdate();
 
@@ -83,7 +86,9 @@ public class PollMgr {
 	                        itemPsmt.setString(3, item[i]);
 	                        itemPsmt.setInt(4, 0);
 	                        j = itemPsmt.executeUpdate();
-	                    }
+	                    } catch (SQLException e) {
+							e.printStackTrace();
+						}
 	                }
 	            }
 
@@ -209,6 +214,8 @@ public class PollMgr {
 				plBean.setQuestion(rs.getString("question"));
 				plBean.setType(rs.getInt("type"));
 				plBean.setActive(rs.getInt("active"));
+				// plBean.setNum(rs.getInt("num"));
+				System.out.println(getClass() + " :: getList() :: NO. "+num);
 			}
 			
 			System.out.println(getClass() + " :: getList() :: 쿼리결과 ==> " + rs + " (true/false)");
@@ -289,13 +296,15 @@ public class PollMgr {
 	public Vector<PollItemBean> getView(int num) {
 		
 		Vector<PollItemBean> vlist = new Vector<PollItemBean>();
-		System.out.println(getClass() + " :: setExample() :: 조회 시작");
+		System.out.println(getClass() + " :: getView() :: 조회 시작");
 		
 		try {
 			conn = pool.getConnection();
 			sql = "SELECT item, count FROM sqlplus.poll_item WHERE listnum = ?";
 			psmt = conn.prepareStatement(sql);
 			if (num == 0) {
+				psmt.setInt(1, getMaxNum());
+			} else {
 				psmt.setInt(1, num);
 			}
 			rs = psmt.executeQuery();
@@ -308,13 +317,13 @@ public class PollMgr {
 				vlist.add(piBean);
 			}
 
-			System.out.println(getClass() + " :: setExample() :: 쿼리결과 ==> " + rs + " (true/false)");
+			System.out.println(getClass() + " :: getView() :: 쿼리결과 ==> " + rs + " (true/false)");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(getClass() + " :: setExample() :: 조회 도중 Exception 발생");
+			System.out.println(getClass() + " :: getView() :: 조회 도중 Exception 발생");
 		} finally {
 			pool.freeConnection(conn, psmt, rs);
-			System.out.println(getClass() + " :: setExample() :: 조회 완료");
+			System.out.println(getClass() + " :: getView() :: 조회 완료");
 		}
 		return vlist;
 	}
@@ -325,7 +334,7 @@ public class PollMgr {
 		
 		try {
 			conn = pool.getConnection();
-			sql = "SELECT sum(count) FROM sqlplus.poll_istem WHERE listnum = ?";
+			sql = "SELECT sum(count) FROM sqlplus.poll_item WHERE listnum = ?";
 			psmt = conn.prepareStatement(sql);
 			
 			if (num==0) {

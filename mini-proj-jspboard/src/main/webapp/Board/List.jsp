@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="board.BoardBean"%>
 <%@ page import="java.util.Vector" %>
 <jsp:useBean id="bMgr" class="board.BoardMgr"></jsp:useBean>
@@ -23,17 +21,17 @@
 	
 	Vector<BoardBean> vlist = null;
 	
-	if (request.getParameter("keyWord")!=null) {
+	if (request.getParameter("keyWord") != null) {
 		keyWord = request.getParameter("keyWord");
 		keyField = request.getParameter("keyField");
 	}
-	if (request.getParameter("reload")!=null){
-		if(request.getParameter("reload").equals("true")){
+	if (request.getParameter("reload") != null) {
+		if (request.getParameter("reload").equals("true")) {
 			keyWord = "";
 			keyField = "";
 		}
 	}
-	if (request.getParameter("nowPage")!=null) {
+	if (request.getParameter("nowPage") != null) {
 		nowPage = Integer.parseInt(request.getParameter("nowPage"));
 	}
 	start = (nowPage * numPerPage) - numPerPage;
@@ -49,11 +47,74 @@
 <head>
 <meta charset="UTF-8">
 <title>[쉐킷펑크]</title>
-
 <style>
-   .borderedLine {border: 1px dotted white;}
+    body {
+        background-color: #f0f0f0;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    h2 {
+        color: #4CAF50;
+        text-align: center;
+    }
+    .table-container {
+        width: 80%;
+        margin: auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    th, td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .pagination {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .search-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+    input[type="text"], select {
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    input[type="button"], input[type="submit"], input[type="reset"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+        background-color: #45a049;
+    }
 </style>
-<link rel="stylesheet" href="styles.css">
 <script type="text/javascript">
 	function list() {
 		document.listFrm.action = "List.jsp";
@@ -72,12 +133,12 @@
 	
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "Read.jsp"
+		document.readFrm.action = "Read.jsp";
 		document.readFrm.submit();
 	}
 	
 	function check() {
-		if (document.searchFrm.keyWord.value=="") {
+		if (document.searchFrm.keyWord.value == "") {
 			alert("검색어를 입력하세요");
 			document.searchFrm.keyWord.focus();
 			return;
@@ -87,143 +148,108 @@
 </script>
 </head>
 
-<body style="color: #66ff66; background-color: #1c1c1c; font-family: consolas;">
-	<div align="center">
-		<hr><h2>[Shake_it Funk Board]</h2>
-		<p></p>
-		<table align="center" width="80%">
-			<tr>
-				<td>
-					Total : <%=totalRecord %> 게시글 (<%=nowPage %>/<%=totalPage %>Pages)
-				</td>
-			</tr>
-		</table>
-		<table class="borderedLine" align="center" width="80%" border="0" cellspacing="0" cellpadding="3">
-			<tr>
-				<td align="center" colspan="2">
-					<%
-						vlist = bMgr.getBoardList(keyField, keyWord, start, end);
-						listSize = vlist.size();
-							if(vlist.isEmpty()) {
-								out.println("등록된 게시물이 없습니다");
-							} else {
-					%>
-					<table border="0" width="100%" cellpadding="2" cellspacing="0">
-						<tr><td colspan="5"><br/></td></tr>
-						<tr align="center" height="120%">
-							<td width="10%">번호</td>
-							<td width="40%">제목</td>
-							<td width="*">이름</td>
-							<td width="*">날짜</td>
-							<td width="*">조회수</td>
-						</tr>
-						<%
-							for(int i=0; i<numPerPage; i++){
-								if(i==listSize){
-									break;
-								}
-								BoardBean bean = vlist.get(i);
-								int num = bean.getNum();
-								String name = bean.getName();
-								String subject = bean.getSubject();
-								String regdate = bean.getRegdate();
-								int depth = bean.getDepth();
-								int count = bean.getCount();
-						%>
-						<tr>
-							<td align="center"><%=num %></td>
-							<td align="left" style="color: #66ff66;">
-							<%
-								if(depth>0) {
-									for (int j=0;j<depth;j++) {
-										out.println("&nbsp;&nbsp;");
-									}
-								}
-							%>
-							<a href="javascript:read('<%=num %>')" style="color: #66aa00;"><%=subject %></a>
-							</td>
-							<td align="center"><%=name %></td>
-							<td align="center"><%=regdate %></td>					
-							<td align="center"><%=count %></td>	
-						</tr>
-						<% } %>
-					</table>
-					<% } %>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><br/></td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td style="color:white;">
-				<!-- 페이징 및 블럭처리 시작 -->
-				<%
-					int pageStart = (nowBlock-1)*pagePerBlock+1;
-					int pageEnd = ((pageStart+pagePerBlock)<totalPage) ? (pageStart+pagePerBlock) : totalPage+1;
-					if(totalPage!=0) {
-						if(nowBlock>1){
-				%>
-					<a href="javascript:block('<%=nowBlock%>')">prev...</a>
-					<% } %> &nbsp;
-					<%
-						for ( ; pageStart<pageEnd; pageStart++){ 
-					%>
-					<a href="javascript:pageing('<%=pageStart %>')" style="color: #66ff66;">
-					<%
-						if(pageStart==nowPage) {
-					%>
-					
-					<% } %>
-					[<%=pageStart %>]
-					<%
-						if(pageStart==nowPage) { 
-					%>
-					<% } %></a>
-					<% } %>&nbsp;
-					<%
-						if(totalBlock>nowBlock) {
-					%>
-					<a href="javascript:block('<%=nowBlock+1 %>')"style="color: #66ff66;">...next</a>
-					<% } %>&nbsp;
-					<% } %>
-					<!-- 페이징 및 블록처리 종료 -->
-				</td>
-				<td align="right">
-					<a href="Post.jsp" style="color: #66ff66;">[글쓰기]</a>
-					<a href="javascript:list()" style="color: #66ff66;">[처음으로]</a>
-				</td>
-			</tr>
-		</table>
+<body>
+	<div class="table-container">
+		<p>
+		<a href="../Vote/poll-list.jsp" style="color: #007b00; text-decoration: none; padding: 10px 15px; border: 0px dotted #ff7bff; border-radius: 5px; transition: background-color 0.3s;">투표 게시판으로 이동</a>
+		</p>
+		
 		<hr>
-		<form name="searchFrm" method="post" action="List.jsp">
-			<table border="0" width="527" align="center" cellpadding="4" cellspacing="0">
-				<tr>
-					<td align="center" valign="bottom">
-						<select name="keyField" size="1">
-							<option value="name">이름</option>
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-						</select>
-						<input size="16" name="keyWord">
-						<input type="button" value="찾기" onclick="javascript:check()">
-						<input type="hidden" name="nowPage" value="1">
-					</td>
-				</tr>
-			</table>
-		</form>
+		<h2>[Shake_it Funk Board]</h2>
+		<p>Total : <%=totalRecord %> 게시글 (<%=nowPage %>/<%=totalPage %> Pages)</p>
 		<table>
-			<tr><td><br/></td><td></td><td></td></tr>
 			<tr>
-				<td align="right" colspan="3">
-					<a style="color: #66ff66;" href="../Login/Logout.jsp">로그아웃</a>
-				</td>
+				<th>번호</th>
+				<th>제목</th>
+				<th>이름</th>
+				<th>날짜</th>
+				<th>조회수</th>
 			</tr>
+			<%
+				vlist = bMgr.getBoardList(keyField, keyWord, start, end);
+				listSize = vlist.size();
+				if (vlist.isEmpty()) {
+					out.println("<tr><td colspan='5'>등록된 게시물이 없습니다</td></tr>");
+				} else {
+					for (int i = 0; i < numPerPage; i++) {
+						if (i == listSize) {
+							break;
+						}
+						BoardBean bean = vlist.get(i);
+						int num = bean.getNum();
+						String name = bean.getName();
+						String subject = bean.getSubject();
+						String regdate = bean.getRegdate();
+						int depth = bean.getDepth();
+						int count = bean.getCount();
+			%>
+			<tr>
+				<td><%=num %></td>
+				<td style="text-align:left;">
+					<%
+						if (depth > 0) {
+							for (int j = 0; j < depth; j++) {
+								out.print("&nbsp;&nbsp;");
+							}
+						}
+					%>
+					<a href="javascript:read('<%=num %>')"><%=subject %></a>
+				</td>
+				<td><%=name %></td>
+				<td><%=regdate %></td>
+				<td><%=count %></td>
+			</tr>
+			<%
+					}
+				}
+			%>
 		</table>
+
+		<div class="pagination">
+			<%
+				int pageStart = (nowBlock - 1) * pagePerBlock + 1;
+				int pageEnd = ((pageStart + pagePerBlock) < totalPage) ? (pageStart + pagePerBlock) : totalPage + 1;
+				if (totalPage != 0) {
+					if (nowBlock > 1) {
+			%>
+			<a href="javascript:block('<%=nowBlock%>')">prev...</a>
+			<%
+					}
+					for (; pageStart < pageEnd; pageStart++) {
+			%>
+			<a href="javascript:pageing('<%=pageStart %>')">[<%=pageStart %>]</a>
+			<%
+					}
+					if (totalBlock > nowBlock) {
+			%>
+			<a href="javascript:block('<%=nowBlock + 1 %>')">...next</a>
+			<%
+					}
+				}
+			%>
+		</div>
+
+		<div class="search-container">
+			<form name="searchFrm" method="post" action="List.jsp">
+				<select name="keyField">
+					<option value="name">이름</option>
+					<option value="subject">제목</option>
+					<option value="content">내용</option>
+				</select>
+				<input size="16" name="keyWord" placeholder="검색어 입력">
+				<input type="button" value="찾기" onclick="check()">
+				<input type="hidden" name="nowPage" value="1">
+			</form>
+		</div>
+
+		<div style="text-align: right;">
+			<a href="Post.jsp">[글쓰기]</a>
+			<a href="javascript:list()">[처음으로]</a>
+		</div>
+		<hr>
 		<form name="listFrm" method="post">
 			<input type="hidden" name="reload" value="true">
-			<input type="hidden" name=nowPage" value="1">
+			<input type="hidden" name="nowPage" value="1">
 		</form>
 		<form name="readFrm" method="get">
 			<input type="hidden" name="num">

@@ -19,7 +19,7 @@
 <head>
 <meta charset="UTF-8">
 <title>[쉐킷Vote]</title>
-<script type="text/javascript">
+<script>
 	alert("<%=msg%>");
 	location.href="poll-list.jsp?num=<%=num%>";
 </script>
