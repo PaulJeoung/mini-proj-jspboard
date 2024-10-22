@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>[쉐킷Vote]</title>
+
 <style>
     body {
         background-color: #f0f0f0;
@@ -61,6 +62,7 @@
         color: white;
     }
 </style>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -68,18 +70,18 @@
         <h3>VOTE 2024</h3>
         <hr/>
         <b>설문작성양식</b><br/>
-        <form method="post" action="poll-insert-proc.jsp" accept-charset="UTF-8">
+        <form name="voteFrm" method="post" action="poll-insert-proc.jsp" accept-charset="UTF-8">
             <table>
                 <tr>
                     <td><b>질문</b></td>
                     <td>
-                        <input type="text" name="question" placeholder="질문할 주제를 작성하세요">
+                        <input type="text" name="question" placeholder="질문할 주제를 작성하세요" required>
                     </td>
                 </tr>
                 <tr>
                     <td rowspan="4" valign="top"><b>보기</b></td>
                     <td>
-                        <input type="text" name="item" placeholder="보기 1">
+                        <input type="text" name="item" placeholder="보기" required>
                     </td>
                 </tr>
                 <%
@@ -148,7 +150,8 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="작성하기">
+                    	<!-- input type="submit" value="작성하기" -->
+                        <input type="button" value="작성하기" onclick="voteInfo()">
                         <input type="reset" value="다시쓰기">
                         <input type="button" value="리스트" onclick="javascript:location.href='poll-list.jsp'">
                     </td>

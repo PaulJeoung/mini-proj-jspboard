@@ -273,33 +273,34 @@ public class BoardMgr {
 		try {
 			conn = pool.getConnection();
 			
-			sql = "SELECT filname FROM sqlplus.board1 WHERE num = ?";
+			sql = "SELECT filename FROM sqlplus.board1 WHERE num = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, num);
 			rs = psmt.executeQuery();
-			System.out.println(getClass() + " :: deleteBoard() :: 파일 삭제를 위한 쿼리 실행");
+			System.out.println(getClass() + " :: deleteBoard() :: hasFile check query");
 			
 			if(rs.next( )&& rs.getString(1)!=null) {
+				System.out.println("            :: filename query result ==> " +  rs.getString(1));
 				if(!rs.getString(1).equals("")){
 					File file = new File(SAVEFOLDER + "/" + rs.getString(1));
 					if(file.exists()) {
 						UtilMgr.delete(SAVEFOLDER + "/" + rs.getString(1));
 					}
 				}
+				System.out.println(getClass() + " :: deleteBoard() :: class UtilMgr delete() logic complete");
 			}
-			System.out.println(getClass() + " :: deleteBoard() :: class UtilMgr를 통해 파일 삭제");
 			
-			sql = "DELTE FROM sqlplus.board1 WHRER num = ?";
+			sql = "DELETE FROM sqlplus.board1 WHERE num = ?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, num);
 			psmt.executeUpdate();
-			System.out.println(getClass() + " :: deleteBoard() :: 쿼리 실행 완료 [UPDATE]");
+			System.out.println(getClass() + " :: deleteBoard() :: DELETE query complete");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println(getClass() + " :: deleteBoard() :: 쿼리 실행 중 Exception 발생");
+			System.out.println(getClass() + " :: deleteBoard() :: occurs Exception during DELETE query");
 		} finally {
 			pool.freeConnection(conn, psmt, rs);
-			System.out.println(getClass() + " :: deleteBoard() :: num 리턴 후 쿼리 조회 종료 ==> " + num);
+			System.out.println(getClass() + " :: deleteBoard() :: DELETE query process finish, return value ==> " + num);
 		}
 	}
 	

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript">
+    <script>
         function idCheck(id) {
             if (id == "") {
                 alert("ID를 입력해주세요.");

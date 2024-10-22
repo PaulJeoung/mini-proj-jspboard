@@ -55,6 +55,16 @@ public class PollMgr {
 	    System.out.println(getClass() + " :: insertPoll() :: 조회 시작");
 
 	    try {
+	    	String q = plBean.getQuestion();
+	    	String sd = plBean.getSdate();
+	    	String ed = plBean.getEdate();
+	    	int tp = plBean.getType();
+	    	System.out.println("                :::: data set check ==> {" + q + ", " + sd + ", " + ed + ", " + tp);
+	    	String bogi[] = piBean.getItem();
+	    	for (int b=0; b<bogi.length; b++) {
+	    		System.out.println("                :::: 보기 data set check ==> {" + bogi[b]);
+	    	}
+	    	
 	        conn = pool.getConnection();
 	        sql = "INSERT sqlplus.poll_list (question, sdate, edate, wdate, type) VALUES (?, ?, ?, now(), ?)";
 	        psmt = conn.prepareStatement(sql);
@@ -63,7 +73,7 @@ public class PollMgr {
 	        psmt.setString(3, plBean.getEdate());
 	        psmt.setInt(4, plBean.getType());
 	        
-	        System.out.println(getClass() + " :: insertPoll() :: questionData ==> " + plBean.getQuestion());
+	        // System.out.println(getClass() + " :: insertPoll() :: questionData ==> " + plBean.getQuestion());
 
 	        int result = psmt.executeUpdate();
 

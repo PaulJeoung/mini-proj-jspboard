@@ -55,6 +55,7 @@
         height: 150px;
     }
 </style>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 <div>
@@ -65,7 +66,7 @@
             <td class="header">답변하기</td>
         </tr>
     </table>
-    <form method="post" action="boardReply">
+    <form name="replyFrm" method="post" action="boardReply">
         <table>
             <tr>
                 <td align="center">
@@ -93,7 +94,8 @@
                         </tr>
                         <tr>
                             <td colspan="2" align="center">
-                                <input type="submit" value="답변등록"/>
+                                <!-- input type="submit" value="답변등록"/-->
+                                <input type="button" value="답변등록" onclick="inputCheck()"/>
                                 <input type="reset" value="다시쓰기"/>
                                 <input type="button" value="뒤로" onclick="history.back()"/>
                             </td>

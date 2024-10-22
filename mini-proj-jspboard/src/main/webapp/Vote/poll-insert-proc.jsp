@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="pMgr" class="vote.PollMgr"></jsp:useBean>
 <jsp:useBean id="plBean" class="vote.PollListBean"></jsp:useBean>
 <jsp:useBean id="piBean" class="vote.PollItemBean"></jsp:useBean>
 <jsp:setProperty property="*" name="plBean"/>
 <jsp:setProperty property="*" name="piBean"/>
-<% request.setCharacterEncoding("UTF-8"); %>
 <%
 	String sdate = request.getParameter("sdateY") + "-" + request.getParameter("sdateM") + "-" + request.getParameter("sdateD");
 	String edate = request.getParameter("edateY") + "-" + request.getParameter("edateM") + "-" + request.getParameter("edateD");
